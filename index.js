@@ -1,16 +1,19 @@
-const express = require("express");
-const app = express();
-const ejsLayouts = require("express-ejs-layouts");
+const express = require("express"); // import express
+const app = express();    // create an express instance
+const ejsLayouts = require("express-ejs-layouts");  // import ejs layouts
+require('dotenv').config() // allows us to access env variables
 
-app.set("view engine", "ejs");
-app.use(ejsLayouts);
-const port = 8000
+// MIDDLEWARE
+app.set("view engine", "ejs");  // set the view engine to ejs
+app.use(ejsLayouts);  // tell express we want to use layouts
+const PORT = process.env.PORT || 8000  // check for an env PORT, otherwise use 8000
 
+// ROUTES
 // GET / - main index
 app.get ('/', (req, res) => {
-  res.send('hello there')
+  res.render('home.ejs')
 })
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}`)
+app.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`)
 })
